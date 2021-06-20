@@ -60,4 +60,31 @@ class Solution {
 ## 和为K的子数组
 ```
 ```
+
+
+# 最大子序和
+```
+class Solution {
+    public int maxSubArray(int[] nums) {
+        // sanity check
+        if (nums == null || nums.length == 0) return 0;
+       
+        int len = nums.length;
+        int[] s = new int[len + 1];
+        int prefixMin = s[0];
+        int ans = Integer.MIN_VALUE;
+        
+        for (int i = 1;  i < s.length; i++) {
+            // s[i]
+            // s[i] - prefixMin ==>max
+            s[i] = s[i - 1] + nums[i - 1];
+            ans = Math.max(ans, s[i] - prefixMin);
+            prefixMin = Math.min(prefixMin, s[i]);
+            
+        } 
+        return ans;
+    }
+}
+```
+
 6/20/2021
