@@ -87,4 +87,45 @@ class Solution {
 }
 ```
 
+
+# 三数之和
+```
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        // sanity check
+        List<List<Integer>> ans = new ArrayList<>();
+        if (nums == null || nums.length < 1) return ans;
+        //sort
+        Arrays.sort(nums);
+      
+        for (int j = 0; j < nums.length; j++) {
+            // two sum
+            if (j > 0 &&nums[j] == nums[j - 1]) continue;
+            List<List<Integer>> res = twoSum(nums, j + 1, -nums[j]);
+            for (List<Integer> list : res) {
+                list.add(nums[j]);
+                ans.add(list);
+            }
+        }
+        return ans;
+    }
+    // two sum
+    private List<List<Integer>> twoSum(int[] nums, int start, int target) {
+        // sorted
+        List<List<Integer>> res = new ArrayList<>();
+        int j = nums.length - 1;
+        for (int i = start; i <nums.length; i++) {
+            if (i >start &&nums[i] == nums[i - 1]) continue;
+            while (i < j && nums[i] +nums[j] > target) j--;
+            if (i < j &&nums[i] + nums[j] == target) {
+                List<Integer> list = new ArrayList<>();
+                list.add(nums[i]);
+                list.add(nums[j]);
+                res.add(list);
+            }
+        }
+        return res;
+    }
+}
+```
 6/20/2021
